@@ -7,11 +7,11 @@ import {
   USER_SIGNOUT,
 
 } from '../constants/userConstant'
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
+import { useHistory } from 'react-router';
 
-const saveTokenInLocalStorage = (result) => {
-  localStorage.setItem('user', JSON.stringify(result))
-}
+
+
 
 export const addToCartAction1 = (product) => {
   return {
@@ -28,8 +28,9 @@ export const removeFromCartAction = (product) => {
 }
 
 
-export const userSignIn = (email, password) => {
-  console.log("🚀 ~ file: userActions.js ~ line 32 ~ userSignIn ~ email", email)
+export const userSignIn = (email, password, history) => {
+
+
   if (email.length === 0) {
     alert('Enter email')
   }
@@ -54,30 +55,97 @@ export const userSignIn = (email, password) => {
     axios
       .post(newUrl, body, header)
       .then((response) => {
-        dispatch({
-          type: USER_SIGNIN_SUCCESS,
-          payload: response.data,
-        })
 
         const result = response.data
 
-        sessionStorage.setItem("name", result.name)
+        if (result != null) {
 
-        saveTokenInLocalStorage(result)
-        sessionStorage.setItem("isLoggedin", true)
-        // history.push('/home')
-        toast.success('Welcome ')
+          dispatch({
+            type: USER_SIGNIN_SUCCESS,
+            payload: response.data,
+          })
+          history.push('/home')
 
-        window.location.href = '/home'
+          toast.success('Welcome')
+
+
+        } else {
+          toast.error('please check email or password')
+
+          history.push('/customerSignIn')
+
+        }
+
+
+
       })
       .catch((error) => {
-        dispatch({
-          type: USER_SIGNIN_FAIL,
-          payload: error,
-        })
+        toast.error("please check email or password")
+
       })
   }
 }
 
+export const sellerSignInAction = (companyEmail, password, history) => {
+
+  if (companyEmail.length === 0) {
+    alert('Enter email')
+  }
+  else if (password.length === 0) {
+    alert('enter password')
+  }
+
+  return (dispatch) => {
+
+
+    const header = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+
+    const body = {
+      companyEmail,
+      password,
+    }
+
+    const newUrl = `${url}/seller/sellerAuthenticate`
+
+    axios
+      .post(newUrl, body, header)
+      .then((response) => {
+
+        const result = response.data
+        if (result != null) {
+
+          dispatch({
+            type: USER_SIGNIN_SUCCESS,
+            payload: response.data,
+          })
+          history.push('/home')
+
+          toast.success('Welcome')
+
+
+        } else {
+          toast.error('please check email or password')
+
+          history.push('/sellerSignIn')
+
+
+
+
+        }
+
+
+
+
+      })
+      .catch((error) => {
+        toast.error(error)
+
+      })
+  }
+}
 
 

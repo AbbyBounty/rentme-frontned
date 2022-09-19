@@ -3,9 +3,7 @@ import axios from 'axios'
 import {useHistory,useLocation } from 'react-router-dom'
 const url = 'http://localhost:8080'
 
-//{{URL}}/user/update/5
-//{{URL}}/admin/customers
-//admin/customers/1
+
 const CustomerChangePassword=()=>{
     const[ password ,setnewPassword]=useState('')
     const[ id ,setid]=useState('')
@@ -14,8 +12,7 @@ const CustomerChangePassword=()=>{
    
     const user= JSON.parse(localStorage.getItem('user'))  
     
-    // const location = useLocation()
-    // const user = location.state.user
+   
     const ChangePassword=(id)=>{
         axios.put(`http://localhost:8080/user/update/${id}`,{'password':password}).then((response)=>{
           alert("success")

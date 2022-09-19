@@ -6,17 +6,9 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react'
 
 const Logout = () => {
-    const history = useHistory()
+  
 
-    useEffect(() => {
-
-
-
-        toast.success(`Logout Success`)
-
-
-
-    }, [])
+   
     sessionStorage.clear()
 
     return (

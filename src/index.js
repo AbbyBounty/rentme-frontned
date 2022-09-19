@@ -12,8 +12,11 @@ import toast, { Toaster } from 'react-hot-toast';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
-    <Toaster />
+
+    <React.StrictMode>
+      <App />
+      <Toaster />
+    </React.StrictMode>
 
   </Provider>,
   document.getElementById('root')

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { useHistory, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 const url = 'http://localhost:8080'
 
 
@@ -10,13 +11,11 @@ const ChangeSellerPassword = () => {
 
   const history = useHistory()
 
-  const [seller, setSeller] = useState(JSON.parse(sessionStorage.getItem('seller')))
+
+  const userSignIn = useSelector(state => state?.userSignIn)
 
 
-
-  // const location = useLocation()
-  // const user = location.state.user
-  const ChangePassword = (sellerId) => {
+  const onChangePassword = (sellerId) => {
     axios.put(`http://localhost:8080/seller/update/${sellerId}`, { 'password': password }).then((response) => {
       alert("success")
       history.push('/home')
@@ -26,7 +25,7 @@ const ChangeSellerPassword = () => {
 
 
     <div className="grid grid-cols-4">
-     
+
       <div className="col-span-3 p-3">
         <input
           onChange={(e) => {
@@ -42,7 +41,7 @@ const ChangeSellerPassword = () => {
         <input type="password" className="form-control p-3 m-3" id="exampleInputPassword1" placeholder="Enter New Password" onChange={(e) => {
           setnewPassword(e.target.value)
         }} />
-        <button type="submit" className="btn btn-success m-3" onClick={() => { ChangePassword(seller.sellerId) }}>Change Password</button>
+        <button type="submit" className="btn btn-success m-3" onClick={() => { onChangePassword(userSignIn[0].sellerId) }}>Change Password</button>
       </div>
     </div >
 

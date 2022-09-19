@@ -1,41 +1,25 @@
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { url } from '../common/constants'
+import { url } from '../../common/constants'
 import SellerMenuBar from './SellerMenuBar';
+import { useSelector } from 'react-redux';
 
 
 const SellerProfile = () => {
+
+  const userSignIn = useSelector(state => state?.userSignIn)
+
+
   const history = useHistory()
-  //  const user= JSON.parse(localStorage.getItem('user'))  //u=user
-  const [seller, setSeller] = useState(JSON.parse(sessionStorage.getItem('seller')))
-  console.log(sessionStorage.getItem('seller'))
 
-  //  const [user, setUser] = useState([])
 
-  //  useEffect(() => {
-  //    console.log(`User got loaded`)
-  //    getUser()
-  //  }, [])
-
-  //  const getUser = () => {
-  //    axios.get(url + `/users/${user1.userid}`).then((response) => {
-  //      const result = response.data
-  //      if (result.status === 'success') {
-  //        setUser(result.data)
-  //      } else {
-  //        alert('error while loading the user')
-  //      }
-  //    })
-  //  }
 
   return (
 
 
     <div className="grid grid-cols-4">
-      <div >
-        {/* <SellerMenuBar /> */}
-      </div>
+
 
 
 
@@ -46,19 +30,16 @@ const SellerProfile = () => {
               <th className="text-gray-500 uppercase ">Seller Id</th>
               <th className="text-gray-500 uppercase ">Company Name</th>
               <th className="text-gray-500 uppercase ">Company Email</th>
-              <th className="text-gray-500 uppercase ">Company Phone </th>
-              <th className="text-gray-500 uppercase ">Comapny Address</th>
-              <th className="text-gray-500 uppercase ">GSTIN</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td> {seller.sellerId} </td>
-              <td> {seller.companyName}</td>
-              <td>{seller.companyEmail}</td>
-              <td>{seller.companyPhone}</td>
-              <td>{seller.companyAddress}</td>
-              <td>{seller.gstin}</td>
+              <td> {userSignIn[0]?.sellerId} </td>
+              <td> {userSignIn[0]?.companyName}</td>
+              <td>{userSignIn[0]?.companyEmail}</td>
+              <td>{userSignIn[0]?.companyPhone}</td>
+              <td>{userSignIn[0]?.companyAddress}</td>
+              <td>{userSignIn[0]?.gstin}</td>
             </tr>
 
             <tr>
@@ -70,7 +51,7 @@ const SellerProfile = () => {
 
         <button
           onClick={() => {
-            history.push(`/sellerEditProfile/${seller.sellerId}`)
+            history.push(`/sellerEditProfile/${userSignIn[0]?.sellerId}`)
           }}
           className="text-blue-600 font-medium hover:text-indigo-500 p-3" >
           Edit
@@ -78,7 +59,7 @@ const SellerProfile = () => {
 
         <button
           onClick={() => {
-            history.push(`/changeSellerPassword/${seller.sellerId}`, { seller: seller })
+            history.push(`/changeSellerPassword/${userSignIn[0]?.sellerId}`, { seller: userSignIn[0] })
           }}
           className="text-red-600 font-medium hover:text-indigo-500 p-3">
           Change password

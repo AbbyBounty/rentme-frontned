@@ -5,7 +5,7 @@ import web3 from '../../common/gifs/seeyousson.gif'
 
 const SellerLogout = () => {
     const history = useHistory()
-    localStorage.removeItem('seller')
+  
     return (
         <div className="col-lg-7" >
             <div className="right-center">

@@ -3,7 +3,10 @@ import { useHistory, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import SellerMenuBar from './SellerMenuBar'
 // const url = 'http://localhost:8080'
-import { url } from '../common/constants'
+import { url } from '../../common/constants'
+import { useSelector } from 'react-redux'
+
+
 const SellerEditProfile = () => {
 
 
@@ -17,15 +20,14 @@ const SellerEditProfile = () => {
   const [role, setRole] = useState('')
   const history = useHistory()
 
+  const userSignIn = useSelector(state => state?.userSignIn)
 
 
 
-  const [seller, setSeller] = useState(JSON.parse(sessionStorage.getItem('seller')))
-  console.log(sessionStorage.getItem('seller'))
 
 
   const EditProfile = () => {
-    const body = { sellerId: seller.sellerId, companyName: companyName, companyPhone: companyPhone, companyAddress: companyAddress, gstin: gstin, companyEmail: companyEmail, password: password, role: role }
+    const body = { sellerId: userSignIn[0].sellerId, companyName: companyName, companyPhone: companyPhone, companyAddress: companyAddress, gstin: gstin, companyEmail: companyEmail, password: password, role: role }
 
 
 
@@ -34,23 +36,18 @@ const SellerEditProfile = () => {
 
       if (result) {
         alert("success")
-        console.log(result)
-        sessionStorage.setItem("seller", JSON.stringify({ sellerId: result.sellerId }))
-      }
-      // saveTokenInLocalStorage(result)
-      else {
-        alert('error')
+
       }
 
+
       history.push('/home')
-    })
+    }).catch(err => alert(err))
+
   }
   return (
 
     <div className="grid grid-cols-4">
-      <div >
-        {/* <SellerMenuBar /> */}
-      </div>
+
       <div className="col-span-3 p-3">
 
         <h2 className="text-indigo-600">Edit profile</h2>
@@ -62,52 +59,50 @@ const SellerEditProfile = () => {
             <label htmlFor="">Company Name   </label>
             <input type="text" className="appearance-none block w-full bg-white-100 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-pink-50" id="exampleInputPassword1" onChange={(e) => {
               setCompanyName(e.target.value)
-            }} defaultValue={seller.companyName} /><br />
+            }} defaultValue={userSignIn[0].companyName} /><br />
 
           </div>
           <div>
             <label htmlFor="">Company Phone  </label>
             <input type="text" className="appearance-none block w-full bg-white-100 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-pink-50" onChange={(e) => {
               setCompanyPhone(e.target.value)
-            }} defaultValue={seller.companyPhone} /><br />
+            }} defaultValue={userSignIn[0].companyPhone} /><br />
 
           </div>
           <div>
             <label htmlFor="">Comapany Address  </label>
             <input type="text" className="appearance-none block w-full bg-white-100 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-pink-50" onChange={(e) => {
               setCompanyAddress(e.target.value)
-            }} defaultValue={seller.companyAddress} /><br />
+            }} defaultValue={userSignIn[0].companyAddress} /><br />
 
           </div>
           <div>
-            <label htmlFor="">GSTIN  </label>
+            <label htmlFor="">Pin Code  </label>
             <input type="text" className="appearance-none block w-full bg-white-100 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-pink-50" onChange={(e) => {
               setGstin(e.target.value)
-            }} defaultValue={seller.gstin} /><br />
+            }} defaultValue={userSignIn[0].gstin} /><br />
 
           </div>
 
         </div>
 
 
-        <button type="submit" className="btn btn-primary" onClick={() => { EditProfile(seller.sellerId) }}>Submit</button>
+        <button type="submit" className="btn btn-primary" onClick={() => { EditProfile(userSignIn[0].sellerId) }}>Submit</button>
 
-        <input type="hidden" className="appearance-none block w-full bg-white-100 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-pink-50" onChange={(e) => {
-          setSellerId(e.target.value)
-        }} defaultValue={seller.sellerId} /><br />
+        <input type="hidden" className="appearance-none block w-full bg-white-100 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-pink-50" defaultValue={userSignIn[0].sellerId} /><br />
 
         <input type="hidden" className="appearance-none block w-full bg-white-100 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-pink-50" onChange={(e) => {
           setCompanyEmail(e.target.value)
-        }} defaultValue={seller.companyEmail} /><br />
+        }} defaultValue={userSignIn[0].companyEmail} /><br />
 
 
         <input type="hidden" className="appearance-none block w-full bg-white-100 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-pink-50" onChange={(e) => {
           setPassword(e.target.value)
-        }} defaultValue={seller.password} /><br />
+        }} defaultValue={userSignIn[0].password} /><br />
 
         <input type="hidden" className="appearance-none block w-full bg-white-100 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-pink-50" onChange={(e) => {
           setRole(e.target.value)
-        }} defaultValue={seller.role} /><br />
+        }} defaultValue={userSignIn[0].role} /><br />
 
       </div>
 

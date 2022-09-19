@@ -4,70 +4,26 @@ import { useState } from "react"
 import axios from 'axios';
 import { url } from '../../common/constants'
 import toast, { Toaster } from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { USER_SIGNIN_SUCCESS } from '../../constants/userConstant'
 import { userSignIn } from '../../actions/userActions';
+import { useHistory } from 'react-router-dom'
+
 
 const CustomerSign = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const history = useHistory()
 
     const dispatch = useDispatch()
 
 
-    const setUser = (result) => {
-        dispatch({
-            type: USER_SIGNIN_SUCCESS,
-            payload: result,
-        })
-    }
-
-    const saveTokenInLocalStorage = (result) => {
-        localStorage.setItem('user', JSON.stringify(result))
-    }
-
     const onSign = () => {
-        dispatch(userSignIn(email, password))
+        dispatch(userSignIn(email, password, history))
+
+
     }
-
-
-    const signIn = (() => {
-
-
-        if (email.length === 0) {
-            alert('Enter email')
-        }
-        else if (password.length === 0) {
-
-            alert('enter password')
-        }
-
-        else {
-            const body = { email: email, password: password }
-
-            axios.post(`${url}/user/authenticate`, body).then(response => {
-
-
-                const result = response.data
-                setUser(result)
-
-                sessionStorage.setItem("name", result.name)
-
-                saveTokenInLocalStorage(result)
-                sessionStorage.setItem("isLoggedin", true)
-                toast.success('Welcome ')
-
-                window.location.href = '/home'
-
-            })
-
-
-        }
-
-    })
-
-
 
 
 
@@ -109,7 +65,7 @@ const CustomerSign = () => {
                                 type="password"
                                 placeholder="*****" />
                         </div>
-                        <button onClick={onSign} className="text-white bg-pink border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                        <button onClick={() => onSign()} className="text-white bg-pink border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                             Sign In As Customer
                         </button>
 

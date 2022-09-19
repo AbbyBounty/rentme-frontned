@@ -12,9 +12,7 @@ const SellerDashboard = () => {
     const [section, setSection] = React.useState("")
 
 
-    React.useEffect(() => {
-        toast.success(`Welcome back `)
-    }, [])
+  
 
     return (
 

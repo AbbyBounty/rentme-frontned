@@ -1,32 +1,35 @@
 
 
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon, ShoppingBagIcon, BiAddToQueue } from '@heroicons/react/outline'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Logout from './Logout';
 import toast, { Toaster } from 'react-hot-toast';
+import { USER_SIGNOUT } from '../../constants/userConstant'
 
-const navigation = [
-  { name: 'Home', to: 'home', current: false },
-  { name: 'Category', to: 'categorylist', current: false },
-  { name: 'About Us', to: 'aboutus', current: false },
-  { name: 'Contact Us', to: 'contactus', current: false },
-]
+
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 const Navbar = (props) => {
-  const onLogout = () => {
-    toast.success('Logout Successfully  ')
 
-    Logout()
-  }
+
+  const userSignIn = useSelector((state) => state?.userSignIn)
+
+
+  const navigation = [
+    { name: userSignIn[0]?.role === "SELLER" ? "My Dashboard" : "Home", to: userSignIn[0]?.role === "SELLER" ? "sellerDashboard" : "home", current: false },
+    { name: 'Category', to: 'categorylist', current: false },
+    { name: 'About Us', to: 'aboutus', current: false },
+    { name: 'Contact Us', to: 'contactus', current: false },
+  ]
+
   const dispatch = useDispatch()
-  const userSignin = useSelector((store) => store.userSignin)
   let history = useHistory();
 
 
@@ -35,7 +38,7 @@ const Navbar = (props) => {
     history.push('/signin-signup')
   }
   const onProfile = () => {
-    history.push('/sellerProfile')
+    userSignIn[0]?.role === "SELLER" ? history.push('/sellerProfile') : history.push('/customerProfile')
   }
 
   const onCart = () => {
@@ -43,6 +46,17 @@ const Navbar = (props) => {
   }
 
   const cartItems = useSelector((state) => state.cartItems)
+
+
+
+  const onLogout = () => {
+    dispatch({
+      type: USER_SIGNOUT,
+      payload: [],
+    })
+    toast.success('Logout Successfully  ')
+    history.push('/logout')
+  }
 
   return (
     <Disclosure as="nav" className="bg-pink mb-5 sticky top-0 ">
@@ -100,7 +114,7 @@ const Navbar = (props) => {
 
               } */}
 
-              {sessionStorage.getItem("isLoggedin") && <div className="inline-block">
+              {/* {sessionStorage.getItem("isLoggedin") && <div className="inline-block">
                 <ShoppingBagIcon
                   className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500 inline-block "
                   onClick={onCart}
@@ -110,19 +124,19 @@ const Navbar = (props) => {
                 <a href="/logout" className="text-white bg-indigo-600 hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium m-1">
                   Logout
                 </a>
-              </div>}
+              </div>} */}
 
 
-              {sessionStorage.getItem("seller") != null && <span>
+              {Object.keys(userSignIn).length !== 0 && <span>
                 <button onClick={onProfile} className="text-white bg-indigo-600 hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium m-2">
                   My Profile
                 </button>
-                <a href="/logout" className="text-white bg-indigo-600 hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                <button onClick={onLogout} className="text-white bg-indigo-600 hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   Logout
-                </a>
+                </button>
               </span>}
 
-              {sessionStorage.length == 0 && <button onClick={onLogin} className="text-white bg-indigo-600 hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              {Object.keys(userSignIn).length === 0 && <button onClick={onLogin} className="text-white bg-indigo-600 hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 Login
               </button>}
 

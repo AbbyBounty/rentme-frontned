@@ -1,56 +1,34 @@
 import { Link, useHistory } from 'react-router-dom'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from 'axios';
 import web1 from '../../common/gifs/couchgif.gif'
-
+import { useDispatch, useSelector } from 'react-redux'
 import { url } from '../../common/constants';
-const SellerSignIn = () => {
+import { sellerSignInAction } from '../../actions/userActions'
+
+const SellerSignIn = ({ props }) => {
     const [companyEmail, setCompanyEmail] = useState('')
     const [password, setPassword] = useState('')
+    const dispatch = useDispatch()
 
 
     const history = useHistory()
-    // const saveTokenInLocalStorage=(resulsignt)=>{
-    //     localStorage.setItem('seller',JSON.stringify(result))
-    //   }
-    const sellerSignIn = (() => {
-
-        if (companyEmail.length === 0) {
-            alert('Enter email')
-        }
-        else if (password.length === 0) {
-            alert('enter password')
-        }
-        else {
-            const body = { companyEmail: companyEmail, password: password }
-
-            axios.post(`${url}/seller/sellerAuthenticate`, body).then(response => {
-                console.log(url)
-
-                const result = response.data
-                console.log(result)
-                if (result?.companyEmail != 'admin@gmail.com') {
 
 
-                    sessionStorage.setItem("seller", JSON.stringify({ sellerId: result?.sellerId, companyName: result?.companyName, companyAddress: result?.companyAddress, companyEmail: result?.companyEmail, companyPhone: result?.companyPhone, gstin: result?.gstin, password: result?.password, role: result?.role }))
-
-                    sessionStorage.setItem("isLogin", true)
-
-                    window.location.href = '/sellerDashboard'
+    const userSignIn = useSelector(state => state?.userSignIn)
 
 
-                }
-                else if (result?.companyEmail == 'admin@gmail.com') {
-                    alert('welcome admin')
-                    history.push('/admin')
 
-                }
-                else {
-                    alert('Error while login')
-                }
-            })
-        }
-    })
+
+
+    const onSignIn = async () => {
+
+        dispatch(sellerSignInAction(companyEmail, password,history))
+
+
+
+    }
+
 
     return (
         <>
@@ -89,7 +67,7 @@ const SellerSignIn = () => {
                                 type="password"
                                 placeholder="*****" />
                         </div>
-                        <button onClick={sellerSignIn} className="text-white bg-pink border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                        <button onClick={onSignIn} className="text-white bg-pink border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                             Sign In As Seller
                         </button>
                         <p className="text-xs text-gray-500 mt-3">

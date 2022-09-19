@@ -117,7 +117,6 @@ const CustomerSignUp = () => {
         if (result) {
           axios.post(emailurl + `/send-mail/?email=${email}`).then(response => {
             const result = response.data;
-            console.log("🚀 ~ file: SignUpSeller.js ~ line 129 ~ axios.post ~ result", result)
             if (result) {
               toast.success('email sent successfully ! ')
             }
