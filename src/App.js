@@ -1,29 +1,29 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import AdminDashBoard from './components/admin/index';
-import Cart from './components/Cart';
-import CategoryList from './components/Categorylist';
-import CategoryNavbar from './components/CategoryNavbar';
-import Changepassword from './components/Changepassword';
-import ChangeSellerPassword from './components/ChangeSellerPassword';
-import Delivery from './components/Delivery';
-import EditProfile from './components/EditProfile';
-import Footer from './components/Footer';
+import AdminDashBoard from './admin/index'
+import Cart from './customer/component/Cart';
+import CategoryList from './common/component/Categorylist';
+import CategoryNavbar from './common/component/NavBar';
+import CustomerChangePassword from './customer/component/CustomerChangePassword';
+import ChangeSellerPassword from './seller/component/ChangeSellerPassword';
+import Delivery from './common/component/Delivery';
+import EditProfile from './common/component/EditProfile';
+import Footer from './components/common/component/Footer';
 import Home from './components/Home';
-import Info from './components/Info';
-import Logout from './components/Logout';
-import Navbar from './components/NavBar';
-import Order from './components/Order';
-import Payment from './components/Payment';
-import SellerDashboard from './components/seller/index';
-import SellerLogout from './components/seller/component/SellerLogout';
-import SellerSignIn from './components/seller/component/SellerSignIn';
-import Signin from './components/Signin';
-import SignUp from './components/SignUp';
-import SignUpSeller from './components/seller/component/SignUpSeller';
-import AboutUs from './pages/AboutUs';
-import Category from './pages/Category';
-import ContactUs from './pages/ContactUs';
+import Info from './common/component/Info';
+import Logout from './common/component/Logout';
+import Navbar from './common/component/NavBar';
+import Order from './customer/component/Order';
+import Payment from './customer/component/Payment';
+import SellerDashboard from './seller/index';
+import SellerLogout from './seller/component/SellerLogout';
+import SellerSignIn from './seller/component/SellerSignIn';
+import CustomerSign from './customer/component/CustomerSign';
+import CustomerSignUp from './customer/component/CustomerSignUp';
+import SignUpSeller from './seller/component/SignUpSeller';
+import AboutUs from './common/pages/AboutUs';
+import Category from './common/pages/Category';
+import ContactUs from './common/pages/ContactUs';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -33,52 +33,49 @@ function App() {
   return (
     <div className="app">
 
-      <div className="container-fluid">
-        <BrowserRouter>
+      <BrowserRouter>
+        <Navbar />
 
-          <Navbar />
-          <Switch>
-
-
-            <Route path="/admin" component={AdminDashBoard} ></Route>
-
-            <Route path="/sellerDashboard" component={SellerDashboard}></Route>
-            <Route path="/sellerSignup" component={SignUpSeller}></Route>
-            <Route path="/sellerSignin" component={SellerSignIn}></Route>
-            <Route path="/sellerLogout" component={SellerLogout}></Route>
+        <Switch>
 
 
-            <Route path="/signin-signup" component={Signin}></Route>
-            <Route path="/cart" component={Cart}></Route>
-            <Route path="/signup" component={SignUp}></Route>
-            <Route path="/changepassword" component={Changepassword}></Route>
-            <Route path="/changeSellerPassword" component={ChangeSellerPassword}></Route>
-            <Route path="/profile" component={Info}></Route>
-            <Route path="/editprofile" component={EditProfile}></Route>
-            <Route path="/logout" component={Logout}></Route>
-            <Route path="/category" component={Category}></Route>
+          <Route path="/admin" component={AdminDashBoard} ></Route>
 
-            <Route path="/home" component={Home}></Route>
+          <Route path="/sellerDashboard" component={SellerDashboard}></Route>
+          <Route path="/sellerSignup" component={SignUpSeller}></Route>
+          <Route path="/sellerSignin" component={SellerSignIn}></Route>
+          <Route path="/sellerLogout" component={SellerLogout}></Route>
+          <Route path="/changeSellerPassword" component={ChangeSellerPassword}></Route>
 
-            <Route path="/categoryNavbar" component={CategoryNavbar}></Route>
-            <Route path="/categoryList" component={CategoryList}></Route>
-            <Route path="/contactus" component={ContactUs}></Route>
-            <Route path="/aboutus" component={AboutUs}></Route>
-            <Route path="/payment" component={Payment}></Route>
-            <Route path="/delivery" component={Delivery}></Route>
-            <Route path="/order" component={Order}></Route>
+          <Route path="/signin-signup" component={CustomerSign}></Route>
+          <Route path="/signup" component={CustomerSignUp}></Route>
+          <Route path="/changepassword" component={CustomerChangePassword}></Route>
 
-            <Route path="/" component={Home}></Route>
+          <Route path="/cart" component={Cart}></Route>
+
+          <Route path="/profile" component={Info}></Route>
+          <Route path="/editprofile" component={EditProfile}></Route>
+          <Route path="/logout" component={Logout}></Route>
+          <Route path="/category" component={Category}></Route>
+
+          <Route path="/home" component={Home}></Route>
+
+          <Route path="/categoryNavbar" component={CategoryNavbar}></Route>
+          <Route path="/categoryList" component={CategoryList}></Route>
+          <Route path="/contactus" component={ContactUs}></Route>
+          <Route path="/aboutus" component={AboutUs}></Route>
+          <Route path="/payment" component={Payment}></Route>
+          <Route path="/delivery" component={Delivery}></Route>
+          <Route path="/order" component={Order}></Route>
+
+          <Route path="/" component={Home}></Route>
 
 
+        </Switch>
 
 
-          </Switch>
+      </BrowserRouter>
 
-
-        </BrowserRouter>
-
-      </div>
       <Footer />
 
     </div>

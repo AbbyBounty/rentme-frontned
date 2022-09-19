@@ -1,7 +1,7 @@
-import CategoryList from "./Categorylist";
-import Search from "./Search";
+import CategoryList from "../common/component/Categorylist";
+import Search from "../common/component/Search";
 import { Link } from "react-router-dom"
-import Footer from "../components/Footer"
+import Footer from "../components/common/component/Footer"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from 'react'
@@ -49,14 +49,14 @@ function Home() {
           <div className="row align-items-center">
             <div className="col-lg-6">
               <div className="hero-content">
-                <h1 className="wow fadeInUp" data-wow-delay=".2s">Rent it Out  </h1>
+                <h1 className="wow fadeInUp text-pink" data-wow-delay=".2s">Rent it Out  </h1>
                 <p className="wow fadeInUp font-medium	" data-wow-delay=".4s">
                   India’s leading rental platform brings the latest Furniture to Pune. High-quality Furniture at super affordable Monthly Rates. Choose your Delivery Slot. 24/7 Customer Support. Return Anytime. 72 - Hour Delivery. Easy Customer KYC. Free Relocation. 7 - Day Free Trial.
                 </p>
               </div>
             </div>
             <div className="flex  col-lg-6  ">
-              <img src="assets/img/common/home.png" alt="" />
+              <img src="assets/img/hero/hero4.png" alt="" />
 
             </div>
 
@@ -96,13 +96,7 @@ function Home() {
         </div>
       </section>
 
-      {/* <section id="services" className="service-section pt-100 wow fadeInUp" data-wow-delay=".2s">
-        <h1 className="wow fadeInUp text-pink " data-wow-delay=".2s">Why to buy when you can Rent it !!!  </h1>
 
-        <div className="flex  col-lg-6  ">
-
-            </div>
-      </section> */}
 
       <section id="services" className="service-section pt-50">
         <div className="container">

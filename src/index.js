@@ -13,7 +13,6 @@ import toast, { Toaster } from 'react-hot-toast';
 ReactDOM.render(
   <Provider store={store}>
     <App />
-    {/* <ToastContainer /> */}
     <Toaster />
 
   </Provider>,
