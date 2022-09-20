@@ -2,7 +2,7 @@
 
 const Footer = () => {
     return (
-        <footer id="footer" className="footer pt-100 pb-70 mt-20 mb-0 bootom-0 ">
+        <footer className="footer pt-100 pb-70 mt-20 mb-0 bootom-0 ">
             <div className="footer-shape">
                 <img src="assets/img/footer/footer-left.svg" alt="" className="shape shape-1" />
                 <img src="assets/img/footer/footer-right.svg" alt="" className="shape shape-2" />

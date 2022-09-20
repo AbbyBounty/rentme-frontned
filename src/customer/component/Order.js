@@ -48,7 +48,7 @@ const Order = () => {
 
   const total = () => {
     let totalVal = 0;
-    for (let i = 0; i < cartItems.length - 1; i++) {
+    for (let i = 0; i < cartItems.length ; i++) {
       totalVal += cartItems[i].productPrice * cartItems[i].month;
     }
     setCartTotal(totalVal);

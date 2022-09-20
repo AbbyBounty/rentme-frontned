@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { url } from '../constants'
 import { useHistory, useLocation } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addToCartAction } from '../../actions/cartActions'
 import { removeFromCartAction } from '../../actions/cartActions'
 
@@ -18,6 +18,7 @@ const Category = () => {
   const [category, setCategory] = useState([])
   const [products, setProducts] = useState([])
   const [month, setMonth] = useState(1)
+  const userSignIn = useSelector((state) => state?.userSignIn)
 
   useEffect(() => {
     getCategory()
@@ -39,6 +40,7 @@ const Category = () => {
 
   const addToCart = (product, month) => {
     product = { ...product, month }
+    
     dispatch(addToCartAction(product))
     toast.success(`${product.productName} added to cart `)
 
@@ -106,7 +108,7 @@ const Category = () => {
               </div>
 
 
-              {sessionStorage.getItem("isLoggedin") == 'true' ?
+              {Object.keys(userSignIn).length !== 0 && userSignIn[0]?.role!=="SELLER" ?
                 <button
                   className="btn btn-success btn-sm mt-2 p-2 w-full lg:max-w-sm"
                   onClick={() => {
@@ -129,7 +131,7 @@ const Category = () => {
                     Add to cart
 
                   </button>
-                  <p className="text-sm font-medium text-gray-400 ">Please login to continue</p>
+                  <p className="text-sm font-medium text-gray-400 ">Please login as customer to continue</p>
                 </div>
               }
 

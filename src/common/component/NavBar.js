@@ -1,13 +1,15 @@
 
 
-import { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon, ShoppingBagIcon, BiAddToQueue } from '@heroicons/react/outline'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, BrowserRouter, Switch, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Logout from './Logout';
 import toast, { Toaster } from 'react-hot-toast';
 import { USER_SIGNOUT } from '../../constants/userConstant'
+import Home from '../../components/Home';
+import { Cart } from '../../customer/component/Cart'
 
 
 
@@ -31,19 +33,22 @@ const Navbar = (props) => {
 
   const dispatch = useDispatch()
   let history = useHistory();
-
+  const [cart, setCart] = React.useState(false)
 
 
   const onLogin = () => {
-    history.push('/signin-signup')
+    history.push('/customer-signin')
   }
   const onProfile = () => {
     userSignIn[0]?.role === "SELLER" ? history.push('/sellerProfile') : history.push('/customerProfile')
   }
 
-  const onCart = () => {
-    history.push('/cart')
-  }
+  // const onCart = () => {
+  //   // history.push('/cart')
+  //   return (
+  //     <Cart />
+  //   )
+  // }
 
   const cartItems = useSelector((state) => state.cartItems)
 
@@ -59,6 +64,7 @@ const Navbar = (props) => {
   }
 
   return (
+
     <Disclosure as="nav" className="bg-pink mb-5 sticky top-0 ">
       {({ open }) => (
         <>
@@ -114,17 +120,15 @@ const Navbar = (props) => {
 
               } */}
 
-              {/* {sessionStorage.getItem("isLoggedin") && <div className="inline-block">
+
+              {Object.keys(userSignIn).length !== 0 && userSignIn[0]?.role !== "SELLER" && <div className="inline-block" onClick={() => setCart(!cart)}>
                 <ShoppingBagIcon
                   className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500 inline-block "
-                  onClick={onCart}
                 />
                 <span className='mr-2 mt-1'>   {cartItems.length}</span>
 
-                <a href="/logout" className="text-white bg-indigo-600 hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium m-1">
-                  Logout
-                </a>
-              </div>} */}
+
+              </div>}
 
 
               {Object.keys(userSignIn).length !== 0 && <span>
@@ -144,7 +148,7 @@ const Navbar = (props) => {
             </div>
           </div>
 
-
+          {cart && <Cart />}
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
@@ -164,7 +168,9 @@ const Navbar = (props) => {
           </Disclosure.Panel>
         </>
       )}
+
     </Disclosure>
+
   )
 }
 

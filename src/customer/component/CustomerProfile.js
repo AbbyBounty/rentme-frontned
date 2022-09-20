@@ -12,9 +12,9 @@ const CustomerProfile = () => {
   const user = JSON.parse(localStorage.getItem('user'))  //u=user
   console.log(user)
   return (
-    <div className="container">
+    <div className="p-4 m-10">
 
-      <table className="table table-striped">
+      <table className="min-w-full divide-y divide-gray-200">
         <thead>
           <tr>
             <th>Name</th>

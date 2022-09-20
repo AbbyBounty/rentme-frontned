@@ -51,7 +51,7 @@ function Home() {
           <div className="row align-items-center">
             <div className="col-lg-6">
               <div className="hero-content">
-                <h1 className="wow fadeInUp text-pink" data-wow-delay=".2s">Rent it Out  </h1>
+                <h1 className="wow fadeInUp text-pink" data-wow-delay=".2s">Rent it Out 🚚</h1>
                 <p className="wow fadeInUp font-medium	" data-wow-delay=".4s">
                   India’s leading rental platform brings the latest Furniture to Pune. High-quality Furniture at super affordable Monthly Rates. Choose your Delivery Slot. 24/7 Customer Support. Return Anytime. 72 - Hour Delivery. Easy Customer KYC. Free Relocation. 7 - Day Free Trial.
                 </p>
@@ -79,7 +79,7 @@ function Home() {
 
             <div className="col-lg-6">
               <div className="hero-content">
-                <h1 className="wow fadeInUp  text-pink" data-wow-delay=".2s">Why to buy when you can Rent it !!!   </h1>
+                <h1 className="wow fadeInUp  text-pink" data-wow-delay=".2s"> Why to buy when you can Rent it !!! 😵   </h1>
                 <p className="wow fadeInUp" data-wow-delay=".4s">
                   <ol className="font-bold " >
                     <li>Finest-quality products ✅</li>
@@ -106,7 +106,7 @@ function Home() {
             <div className="col-xl-6 col-lg-8">
               <div className="section-title text-center mb-70">
                 <span className="wow fadeInUp" data-wow-delay=".2s">Rental Services</span>
-                <h1 className="wow fadeInUp" data-wow-delay=".4s">Explore all Essentials You Need from 1-6 months </h1>
+                <h1 className="wow fadeInUp" data-wow-delay=".4s">Explore all Essentials You Need from 1-6 months 🗓️ </h1>
               </div>
             </div>
           </div>
