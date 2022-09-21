@@ -174,7 +174,7 @@ export const Cart = () => {
                         : <div className="pt-5 mt-6 flex justify-center">
 
                           <h4 className='text-indigo-600 font-medium '>
-                            oh!! your Cart is empty
+                            oh 🤦🏻‍♂️ !! your Cart is empty
                           </h4>
                         </div>
                       }

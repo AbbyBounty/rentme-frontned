@@ -131,7 +131,7 @@ const Order = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-xl text-black-900"> {cartTotal} ₹</div>
+                        <div className="text-xl text-black-900"> ₹ {cartTotal} </div>
                       </td>
 
                       <td>

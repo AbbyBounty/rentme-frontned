@@ -20,12 +20,12 @@ const CustomerProfile = () => {
             <th>Name</th>
             <th>Email</th>
             <th>Address</th>
-            <th>PinCode</th>
+            <th>Pin Code</th>
             <th>Phone No.</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr >
             <td> {userSignIn[0]?.name}</td>
             <td> {userSignIn[0]?.email}</td>
             <td> {userSignIn[0]?.address}</td>
@@ -36,14 +36,14 @@ const CustomerProfile = () => {
                 onClick={() => {
                   history.push(`/editprofile/${userSignIn[0]?.id}`, { user: userSignIn[0] })
                 }}
-                className="btn btn-success btn-sm">
+                className="btn  btn-m bg-pink text-white">
                 Edit
               </button>
               <button
                 onClick={() => {
                   history.push(`/changepassword/${userSignIn[0]?.id}`, { userSignIn: user })
                 }}
-                className="btn btn-danger btn-sm ml-5">
+                className="btn bg-pink text-white btn-m ml-5">
                 Change Password
               </button>
             </td>

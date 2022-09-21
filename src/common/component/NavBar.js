@@ -93,7 +93,7 @@ const Navbar = (props) => {
                     src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                     alt="Workflow"
                   />
-                  <h4 className="wow fadeInUp ml-2 mt-1 text-indigo-500" >LeasePe</h4>
+                  <h4 className="wow fadeInUp ml-2 mt-1 text-white" >LeasePe</h4>
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
@@ -121,11 +121,12 @@ const Navbar = (props) => {
               } */}
 
 
-              {Object.keys(userSignIn).length !== 0 && userSignIn[0]?.role !== "SELLER" && <div className="inline-block" onClick={() => setCart(!cart)}>
-                <ShoppingBagIcon
-                  className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500 inline-block "
-                />
-                <span className='mr-2 mt-1'>   {cartItems.length}</span>
+              {Object.keys(userSignIn).length !== 0 && userSignIn[0]?.role !== "SELLER" && <div className="text-white bg-indigo-600 hover:bg-indigo-700 hover:text-white px-2  rounded-md text-sm p-1 cursor-pointer" onClick={() => setCart(!cart)}>
+              
+                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" className="bi bi-cart4 pt-0 mt-0 inline-block "  viewBox="0 0 16 16">
+                  <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                </svg>
+                <span className=' text-white ml-1  font-bold text-lg inline-block'>   {cartItems.length}</span>
 
 
               </div>}

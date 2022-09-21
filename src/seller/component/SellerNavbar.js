@@ -11,7 +11,7 @@ const SellerNavbar = () => {
 
       <div className="container">
         <Link className="navbar-brand float-left" to="/sellerDashboard">
-          Grocery Shop
+          LeasePe
         </Link>
 
         <div className="collapse navbar-collapse" style={{ marginLeft: 620 }}>
