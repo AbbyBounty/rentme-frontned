@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom'
 import { url } from '../../common/constants';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 
 const AddProduct = () => {
@@ -18,10 +18,11 @@ const AddProduct = () => {
     const [productImage, setProductImage] = useState(undefined)
 
 
-    const history = useHistory()
 
 
-    const [seller1, setSeller1] = useState(JSON.parse(sessionStorage.getItem('seller')))
+
+    const userSignIn = useSelector(state => state?.userSignIn)
+
     console.log(sessionStorage.getItem('seller'))
 
     const product = (() => {
@@ -36,31 +37,17 @@ const AddProduct = () => {
         body.append("productRating", productRating);
         body.append("productImage", productImage);
         body.append("category", category);
-        body.append("sellerId", seller1.sellerId);
-        // body.append('sellerId', seller1.sellerId);
+        body.append("sellerId", userSignIn[0]?.sellerId);
+  
 
 
-        // console.log("body :"+ body)
-
-        // console.log("body :"+ body.seller)
-        // console.log("body category :" + body.category)
-
-
-
-
-        // const body = {category}
         axios.post(url + `/products/image`, body).then(response => {
             const result = response.data;
 
             console.log(result)
             if (result) {
                 alert('succcess')
-                // sessionStorage.setItem("seller", JSON.stringify({sellerId : result.sellerId}))
-                // history.push("/sellerDashboard")
 
-                console.log(result.category)
-                console.log(result.seller)
-                console.log(seller1.sellerId)
             }
 
             else {
